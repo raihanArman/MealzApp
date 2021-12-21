@@ -88,7 +88,7 @@ fun MealCategory(meal: Category){
                 else Icons.Filled.KeyboardArrowDown,
                 contentDescription = "Expand row icon",
                 modifier = Modifier.padding(5.dp)
-                    .size(24.dp)
+                    .size(23.dp)
                     .align(
                         if(isExpanded)
                             Alignment.Bottom
