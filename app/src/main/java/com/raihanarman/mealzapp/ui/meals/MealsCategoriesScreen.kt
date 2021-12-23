@@ -25,7 +25,7 @@ import com.raihanarman.mealzapp.ui.theme.MealzAppTheme
 
 
 @Composable
-fun MealsCategoriesScreen() {
+fun MealsCategoriesScreen(navigationCallback: (String) -> Unit) {
     val viewModel: MealsCategoriesViewModel = viewModel()
     val meals = viewModel.mealsState.value
 
@@ -33,13 +33,13 @@ fun MealsCategoriesScreen() {
         contentPadding = PaddingValues(16.dp)
     ){
         items(meals){meals->
-            MealCategory(meal = meals)
+            MealCategory(meal = meals, navigationCallback = navigationCallback)
         }
     }
 }
 
 @Composable
-fun MealCategory(meal: Category){
+fun MealCategory(meal: Category,navigationCallback: (String) -> Unit){
     var isExpanded by remember{
         mutableStateOf(false)
     }
@@ -50,6 +50,9 @@ fun MealCategory(meal: Category){
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp)
+            .clickable {
+                navigationCallback(meal.idCategory)
+            }
     ){
         Row(
             modifier = Modifier.animateContentSize()
@@ -107,6 +110,6 @@ fun MealCategory(meal: Category){
 @Composable
 fun DefaultPreview() {
     MealzAppTheme {
-        MealsCategoriesScreen()
+        MealsCategoriesScreen({})
     }
 }
